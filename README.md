@@ -1,0 +1,2 @@
+# CraftyProse
+Humanized Content writer
