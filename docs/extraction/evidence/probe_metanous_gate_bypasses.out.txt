@@ -1,0 +1,10 @@
+4a. draft w/ generic AI intro at DRAFT gate: draft passed; next stage: factcheck
+    factcheck passed; next stage: editorial
+    editorial passed; next stage: human_writing
+4b. HW review attempt 1: human_writing gate failed (attempt 1 of 3); fix and resubmit | status=in_progress
+4b. HW review attempt 2: human_writing gate failed (attempt 2 of 3); fix and resubmit | status=in_progress
+4b. HW review attempt 3: human_writing gate failed 3 times; moved to requires_human_review | status=requires_human_review
+5a. HW fail -> human_writing verdict fail; revision 1 required
+5b. revision w/ ZERO resolutions + UNCHANGED text -> revision passed; next stage: factcheck
+8. critical 'fabricated statistic' self-marked resolved, never revised -> approve ok = True | content approved
+9. zero-finding rubber-stamp reviews -> approve ok = True

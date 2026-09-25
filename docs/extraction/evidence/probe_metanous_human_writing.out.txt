@@ -1,0 +1,7 @@
+1. Known-AI draft-v2 -> (gate passed, failed checks, semantic findings): (True, [], [('HW-PARA-SCALE-1', 'major')])
+   'X is not Y. It is Z' contrasts in draft-v2: 11 | hits from the validator's NOT_BUT regex: 0
+2. 'Clean' test fixture -> (True, [], [('HW-PARA-MONOTONY-1', 'minor')])
+   contrast constructions in fixture: 5
+3. Human-style prose -> (True, [], [])
+4. Draft + 15 uncited statistics -> citations gate: PASS | claims gate: PASS
+5. Fabricated URL -> sources gate: PASS

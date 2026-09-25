@@ -1,0 +1,22 @@
+1. GCVEngine() construction
+   FAIL: NameError name 'FirstPersonExperienceValidator' is not defined
+   gcv_validators import FAIL: NameError name 'BaseValidator' is not defined
+2. GCV-001 trade-offs validator on a real Pros/Cons table
+   passed = False (a correct validator would pass this)
+3. GCV-009 'factual claim' extractor on non-factual sentences
+   ['xThis guide walks through the thinking behind our process', 'Thanks for reading this far today']
+4. EvidenceService.ingest_evidence on a clean government statistic
+   FAIL: TypeError EvidenceItem.__init__() got an unexpected keyword argument 'access_date'
+5. Excerpt extraction when the source does not support the claim
+   excerpt returned as 'evidence': 'Completely unrelated text about weather patterns in the northern hemis'
+6. KPService: save, then modify again (JSON round-trip)
+   FAIL on second write: AttributeError 'str' object has no attribute 'value'
+7. Confidence gate fed self-reported confidence and a nonexistent evidence id
+   score: 109 status: authorized | component weights sum to 1.1
+8. ExecutionEngine self-test sequence (gate 0 -> gate 1)
+   transition to 0: (<GateTransitionResult.INVALID_SEQUENCE: 'invalid_sequence'>, 'Gates must be sequential: 0 -> 0')
+   transition to 1: (<GateTransitionResult.BLOCKED_PREREQ: 'blocked_prereq'>, 'Prerequisite gate 0 not passed')
+9. WriterDeclaration: all compliance booleans are self-set by the writer
+   submit: False | validate: False
+   reload of a saved declaration: None (status is saved as 'DeclarationStatus.DRAFT' and cannot be parsed back)
+   even when it works, the gate checks only booleans the writer set; the draft is never examined
