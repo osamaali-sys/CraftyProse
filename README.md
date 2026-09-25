@@ -4,7 +4,7 @@ A content engine for business and marketing content. It researches, plans, write
 
 ## Status
 
-**Architecture approved 2026-09-25.** Implementation starts with milestone M1 (core).
+**Architecture approved 2026-09-25.** Milestone M1 (core engine) is built and tested.
 
 | Phase | State |
 |---|---|
@@ -12,8 +12,18 @@ A content engine for business and marketing content. It researches, plans, write
 | 2. Methodology extraction | Done |
 | 3. Architecture | Approved |
 | 4. Architectural review | Approved (decisions in proposal §22.1) |
-| 5. Build | Starting with M1 (core) |
+| 5. Build | M1 core done ([progress note](docs/progress/M1-core.md)); M2 next |
 | 6–7. Validate, adversarial QA | Not started |
+
+## Run the tests
+
+Python 3.11 or later, no dependencies:
+
+```bash
+python -m unittest discover -s tests -t .
+```
+
+The suite never touches the network.
 
 ## Read in this order
 
