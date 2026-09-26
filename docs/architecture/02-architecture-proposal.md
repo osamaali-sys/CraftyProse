@@ -524,17 +524,17 @@ workspace/
   learning.jsonl                  one line per finding: pattern, type, stage, outcome
   work/<W-YYYYMMDD-NNN>/
     request.md
-    state.json                    status, stage, attempts, revision_count, draft sha, budgets
-    events.jsonl                  append-only: every submit, gate run, routing, approval
-    brief.json  questions.json
-    research/   sources.json evidence.json claims.json gaps.json ledger-review.json
-    plan.json
-    drafts/     draft-v1.md draft-v2.md ...          immutable
-    reviews/    round-1/{deterministic,evidence,editorial,writing}.json ...
-    revisions/  revision-v1.json ...                 immutable
-    validations/<gate>-<n>.json                      every gate run (B documented this; now it's true)
-    release/    content.md seo.json schema.jsonld sources.md release_record.json
+    state.json                    status, stage, attempts, revision budget, accepted versions, draft sha
+    events.jsonl                  append-only: every submission, gate run, routing, pause, approval
+    submissions/<stage>/<stage>-vN.{json,md}   every submission, including failed ones; immutable
+    validations/<stage>-vN.json                every gate run on submission vN (B documented this; now it's true)
+    drafts/draft-vN.md                         accepted drafts only; a passed revision becomes the next draft
+    human/input-vN.md                          answers and notes from people (resume --note)
+    metrics/llm_calls.jsonl                    one metering record per LLM call (ADR-016)
+    release/  approval.json (human approval) + the release package (M7)
 ```
+
+*[implementation refinement, M1]* Every stage's artifact is versioned, including the brief, research, plan, review and release artifacts, rather than keeping single-file "stable" artifacts as B did. `state.json` records which version of each stage is accepted. This is stricter immutability than the sketch above it replaced, and it's how the engine keeps failed submissions without letting them become current. Each stage produces one artifact per submission: research is a single JSON document holding sources, evidence, claims and gaps, and a review round is a single document holding every judge's output plus the deterministic report.
 
 This inherits B's atomic writes, persist-before-validate, immutable versions and draft-persistence invariant, with a numeric version sort (ER §17).
 
