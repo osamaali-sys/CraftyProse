@@ -1,0 +1,17 @@
+[[personas]]
+id = "dispatcher"
+who = "The person at a small courier firm who assigns drivers to runs, usually by phone, text and a shared spreadsheet."
+sophistication = "practitioner"
+problems = ["Last-minute changes break the plan for the whole day", "Drivers call in for updates the dispatcher doesn't have"]
+questions = ["How do I reassign a run without calling every driver?", "What should the plan look like before the first van leaves?"]
+objections = ["Our drivers won't use another app", "Switching tools mid-season is too risky"]
+vocabulary = ["runs", "stops", "call-ins", "the board"]
+
+[[personas]]
+id = "owner"
+who = "The owner of a courier firm who also covers dispatch on busy days."
+sophistication = "novice"
+problems = ["Can't see where the day stands without asking three people"]
+questions = ["Is this worth the setup time for a firm our size?"]
+objections = ["We're too small for software"]
+vocabulary = ["the day", "drivers", "clients"]

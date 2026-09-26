@@ -1,0 +1,699 @@
+# CraftyProse failure-pattern library.
+#
+# The shared vocabulary for deterministic validators, judges, revision and the
+# learning log (architecture §3.3). Every finding cites one of these IDs.
+#
+# Prefixes set jurisdiction: EV and RK belong to the evidence judge, ED and DS to
+# the editorial judge, HW and VO to the writing judge; ST is deterministic only.
+# "detectors" says who can raise the pattern: deterministic code, the judge for
+# its prefix, or both. "severity" is the default; critical and major block.
+#
+# Derived from lineage A's library (ER §13 P16), rewritten generically: client
+# examples removed, duplicate IDs removed, and patterns that rewarded invented
+# specifics (named staff, first-person experience quotas, "original research"
+# markers) removed.
+
+version = "1.0"
+
+# ------------------------------------------------------------------ evidence
+[[patterns]]
+id = "EV-UNCITED-CLAIM"
+name = "Uncited factual claim"
+severity = "major"
+detectors = ["deterministic", "judge"]
+definition = "A sentence states a fact, figure, study result or comparison without a claim marker linking it to evidence."
+remediation = "Link the sentence to an allowed claim, rephrase it as clearly labeled opinion, or remove it. If the fact is needed and no claim exists, request research."
+example = "Most operations teams lose an hour a day to manual scheduling."
+
+[[patterns]]
+id = "EV-UNKNOWN-CLAIM"
+name = "Marker points to an unknown claim"
+severity = "critical"
+detectors = ["deterministic"]
+definition = "A claim marker refers to a claim that isn't in the plan's allowed claims."
+remediation = "Use an allowed claim or remove the statement."
+
+[[patterns]]
+id = "EV-NUMBER-MISMATCH"
+name = "Number doesn't match its evidence"
+severity = "critical"
+detectors = ["deterministic"]
+definition = "A number in a claim-bearing sentence doesn't appear in the referenced claim or its evidence excerpt."
+remediation = "Use the number exactly as the evidence states it, with its scope, or remove it."
+example = "Evidence says 72%; the sentence says 82%."
+
+[[patterns]]
+id = "EV-UNUSABLE-CLAIM"
+name = "Unusable claim used"
+severity = "critical"
+detectors = ["deterministic"]
+definition = "The text relies on a claim marked unsupported, conflicted or awaiting confirmation."
+remediation = "Remove the statement. It can return only after the claim is verified or confirmed by a person."
+
+[[patterns]]
+id = "EV-EXCERPT-NOT-FOUND"
+name = "Excerpt not in the retrieved source"
+severity = "critical"
+detectors = ["deterministic"]
+definition = "An evidence excerpt doesn't appear in the source text the engine retrieved."
+remediation = "Quote the source exactly from the retrieved text, or drop the evidence item."
+
+[[patterns]]
+id = "EV-EXCLUDED-SOURCE"
+name = "Excluded source type"
+severity = "major"
+detectors = ["deterministic"]
+definition = "A third-party claim rests on a source type that is never acceptable (unattributed pages, forums, marketing copy, competitor sites, AI-generated text)."
+remediation = "Find an acceptable source or drop the claim."
+
+[[patterns]]
+id = "EV-INSUFFICIENT-EVIDENCE"
+name = "Evidence below the bar for the claim"
+severity = "major"
+detectors = ["deterministic"]
+definition = "The claim lacks the number, independence or authority of evidence its kind and criticality require."
+remediation = "Add independent evidence of the required authority, lower the claim's criticality by narrowing it, or remove it."
+
+[[patterns]]
+id = "EV-UNAPPROVED-FIRST-PARTY"
+name = "Unapproved first-party claim"
+severity = "major"
+detectors = ["deterministic"]
+definition = "A statement about the brand, its results or its customers isn't backed by a current approved claim."
+remediation = "Use an approved claim's wording, or mark the fact for confirmation by a person. It can't be released until confirmed."
+
+[[patterns]]
+id = "EV-UNDISCLOSED-CONFLICT"
+name = "Conflicting evidence not handled"
+severity = "major"
+detectors = ["deterministic", "judge"]
+definition = "Sources disagree about a claim the piece uses, and the piece neither discloses the disagreement nor excludes the claim."
+remediation = "State the range or disagreement plainly, or leave the claim out."
+
+[[patterns]]
+id = "EV-UNSUPPORTED-CLAIM"
+name = "Evidence doesn't support the sentence"
+severity = "critical"
+detectors = ["judge"]
+definition = "The cited evidence doesn't support what the sentence says, in scope, magnitude, population, date or direction."
+remediation = "Rewrite the sentence to say only what the evidence says, or remove it."
+example = "Evidence covers US courier firms in 2024; the sentence says 'logistics companies worldwide'."
+
+[[patterns]]
+id = "EV-OVERSTATEMENT"
+name = "Overstatement"
+severity = "major"
+detectors = ["judge"]
+definition = "The sentence is stronger than its evidence: certainty where the source hedges, 'most' where it says 'some', a cause where it shows a correlation."
+remediation = "Match the evidence's strength and qualifiers."
+
+[[patterns]]
+id = "EV-INFERENCE-AS-FACT"
+name = "Inference stated as fact"
+severity = "major"
+detectors = ["judge"]
+definition = "A conclusion drawn from evidence is stated as if a source had established it."
+remediation = "Mark it as reasoning ('which suggests', 'so we expect') and keep its premises visible."
+
+[[patterns]]
+id = "EV-OPINION-AS-FACT"
+name = "Opinion stated as fact"
+severity = "major"
+detectors = ["judge"]
+definition = "The brand's view is presented as external fact."
+remediation = "Attribute it to the speaker ('we think', 'in our view') or support it with evidence."
+
+[[patterns]]
+id = "EV-CHERRY-PICKED"
+name = "Cherry-picked evidence"
+severity = "major"
+detectors = ["judge"]
+definition = "The piece uses the part of a source that supports its point and ignores material in the same source that qualifies or contradicts it."
+remediation = "Include the qualification or contrary finding, or narrow the claim."
+
+[[patterns]]
+id = "EV-UNSUBSTANTIATED-SUPERLATIVE"
+name = "Superlative without comparative evidence"
+severity = "major"
+detectors = ["deterministic", "judge"]
+definition = "'Best', 'leading', 'only', 'fastest', 'first' or similar appears without evidence that makes the comparison."
+remediation = "Remove the superlative or support it with comparative evidence."
+
+[[patterns]]
+id = "EV-VAGUE-ATTRIBUTION"
+name = "Vague attribution"
+severity = "major"
+detectors = ["judge"]
+definition = "Authority is borrowed without a source: 'studies show', 'experts agree', 'industry reports'."
+remediation = "Name the source the claim marker points to, or cut the attribution."
+
+[[patterns]]
+id = "EV-MISSING-CONDITIONS"
+name = "Absolute where conditions apply"
+severity = "major"
+detectors = ["judge"]
+definition = "Advice or a claim is stated as always true when the evidence shows it depends on conditions."
+remediation = "State the conditions under which it holds."
+
+[[patterns]]
+id = "EV-STALE-SOURCE"
+name = "Source older than the limit"
+severity = "minor"
+detectors = ["deterministic"]
+definition = "A source is older than the content type allows for its claim kind."
+remediation = "Find current evidence or state the date the evidence refers to."
+
+[[patterns]]
+id = "EV-FABRICATED-SPECIFIC"
+name = "Specific not found in evidence or brand knowledge"
+severity = "critical"
+detectors = ["deterministic", "judge"]
+definition = "A named person, customer, number, date, quote or case appears that isn't in the ledger or the brand workspace."
+remediation = "Remove it. Specifics come only from evidence and approved brand knowledge."
+
+# ---------------------------------------------------------------------- risk
+[[patterns]]
+id = "RK-FORBIDDEN-TERM"
+name = "Forbidden term"
+severity = "major"
+detectors = ["deterministic"]
+definition = "The text uses a term the brand's guardrails forbid."
+remediation = "Remove or replace the term as the guardrail's message directs."
+
+[[patterns]]
+id = "RK-FORBIDDEN-PATTERN"
+name = "Forbidden pattern"
+severity = "major"
+detectors = ["deterministic"]
+definition = "The text matches a pattern the brand's guardrails forbid."
+remediation = "Rewrite the passage so it no longer matches, as the guardrail's message directs."
+
+[[patterns]]
+id = "RK-FORBIDDEN-CLAIM"
+name = "Forbidden claim"
+severity = "critical"
+detectors = ["deterministic"]
+definition = "The text makes a claim the brand has explicitly forbidden."
+remediation = "Remove the claim."
+
+[[patterns]]
+id = "RK-BANNED-TOPIC"
+name = "Banned topic"
+severity = "major"
+detectors = ["deterministic"]
+definition = "The request or text covers a topic the brand's guardrails ban."
+remediation = "Drop the topic, or ask the brand owner to change the guardrail."
+
+[[patterns]]
+id = "RK-MISSING-DISCLOSURE"
+name = "Required disclosure missing"
+severity = "major"
+detectors = ["deterministic"]
+definition = "The text mentions a subject that triggers a required disclosure, and the disclosure is absent."
+remediation = "Add the disclosure text exactly as the guardrail gives it."
+
+[[patterns]]
+id = "RK-SPEAKER-POLICY"
+name = "Speaker policy broken"
+severity = "major"
+detectors = ["deterministic"]
+definition = "The text speaks in a way the brand's speaker policy forbids, such as first-person singular in a company voice."
+remediation = "Rewrite in the brand's voice (for example, 'we' for a company)."
+
+[[patterns]]
+id = "RK-BLOCKED-BY-OPEN-QUESTION"
+name = "Depends on an unresolved question"
+severity = "major"
+detectors = ["deterministic"]
+definition = "The request or text covers a topic the brand has marked blocked until an open question is answered."
+remediation = "Leave the topic out, or get the question answered and resolved in the brand workspace."
+
+[[patterns]]
+id = "RK-UNLICENSED-ADVICE"
+name = "Regulated advice without qualification"
+severity = "critical"
+detectors = ["judge"]
+definition = "The text gives prescriptive legal, medical, financial, tax or safety advice that needs a licensed professional."
+remediation = "Turn the advice into general information, add the required disclosure, and point the reader to a qualified professional."
+
+[[patterns]]
+id = "RK-HIDDEN-AFFILIATION"
+name = "Undisclosed commercial relationship"
+severity = "major"
+detectors = ["judge"]
+definition = "The text recommends a product, partner or vendor the brand has a commercial relationship with, without saying so."
+remediation = "Disclose the relationship where the recommendation is made."
+
+# ----------------------------------------------------------------- editorial
+[[patterns]]
+id = "ED-OFF-BRIEF"
+name = "Doesn't do what the brief asked"
+severity = "critical"
+detectors = ["judge"]
+definition = "The piece misses the brief's objective or reader outcome."
+remediation = "Rework the piece around the stated objective and reader outcome."
+
+[[patterns]]
+id = "ED-WRONG-AUDIENCE"
+name = "Written for the wrong reader"
+severity = "major"
+detectors = ["judge"]
+definition = "Assumed knowledge, vocabulary or concerns don't match the target audience."
+remediation = "Rewrite for the persona's knowledge, questions and objections."
+
+[[patterns]]
+id = "ED-GENERIC-ANGLE"
+name = "Generic angle"
+severity = "major"
+detectors = ["judge"]
+definition = "The central idea could be published by any competitor with the name swapped; nothing ties it to this brand's knowledge, offerings or audience."
+remediation = "Ground the angle in the brand's approved knowledge and the evidence gathered. Don't invent specifics to make it look particular."
+
+[[patterns]]
+id = "ED-THIN-SUBSTANCE"
+name = "Thin substance"
+severity = "major"
+detectors = ["judge"]
+definition = "The piece restates common knowledge; a reader finishes it knowing little they didn't know."
+remediation = "Add the reasoning, trade-offs or evidence-backed specifics the plan provides, or cut to what is genuinely useful."
+
+[[patterns]]
+id = "ED-NO-DECISION-SUPPORT"
+name = "Reader can't act on it"
+severity = "major"
+detectors = ["judge"]
+definition = "The purpose calls for helping the reader decide or act, but the piece gives no criteria, trade-offs or next steps."
+remediation = "Give the reader what they need to decide or act, in whatever form the argument calls for."
+
+[[patterns]]
+id = "ED-BURIED-ANSWER"
+name = "Answer arrives late"
+severity = "major"
+detectors = ["judge"]
+definition = "The main answer or point appears after a long preamble."
+remediation = "Lead with the answer; follow with the explanation."
+
+[[patterns]]
+id = "ED-SCOPE-MISMATCH"
+name = "Promise and delivery don't match"
+severity = "major"
+detectors = ["judge"]
+definition = "The title or opening promises more or less than the piece delivers."
+remediation = "Align the promise with what the piece covers."
+
+[[patterns]]
+id = "ED-TEMPLATE-STRUCTURE"
+name = "Structure follows a template, not the argument"
+severity = "major"
+detectors = ["judge"]
+definition = "Sections follow a generic sequence (problem, three solutions, conclusion) that doesn't fit this argument."
+remediation = "Order sections by what the reader needs next for this particular argument."
+
+[[patterns]]
+id = "ED-REPETITIVE"
+name = "Points repeated"
+severity = "minor"
+detectors = ["judge"]
+definition = "The same point is made again in different words across sections."
+remediation = "Make each point once, where it does the most work."
+
+[[patterns]]
+id = "ED-WEAK-CTA"
+name = "Vague call to action"
+severity = "minor"
+detectors = ["judge"]
+definition = "The call to action is generic or doesn't follow from the piece."
+remediation = "Name one concrete next step that follows from what the reader just learned."
+
+[[patterns]]
+id = "ED-REPEATS-PUBLISHED"
+name = "Repeats released content"
+severity = "major"
+detectors = ["deterministic", "judge"]
+definition = "The piece substantially repeats the topic or argument of something the brand has already released."
+remediation = "Find a new angle or reader question, or update the earlier piece instead."
+
+[[patterns]]
+id = "ED-UNANSWERED-COUNTER"
+name = "Strongest objection ignored"
+severity = "major"
+detectors = ["judge"]
+definition = "An argued piece doesn't engage the strongest objection to its position, or answers a weak one instead."
+remediation = "State the strongest objection fairly and respond to it with evidence or reasoning."
+
+# ----------------------------------------------------------- discoverability
+[[patterns]]
+id = "DS-TITLE-LENGTH"
+name = "Title length out of range"
+severity = "minor"
+detectors = ["deterministic"]
+definition = "The title is outside the content type's character range."
+remediation = "Shorten or extend the title without adding filler or repeated keywords."
+
+[[patterns]]
+id = "DS-META-LENGTH"
+name = "Meta description length out of range"
+severity = "minor"
+detectors = ["deterministic"]
+definition = "The meta description is outside the content type's character range."
+remediation = "Rewrite it as one plain summary within the range."
+
+[[patterns]]
+id = "DS-PRIMARY-QUESTION-MISSING"
+name = "Primary question not addressed up front"
+severity = "major"
+detectors = ["deterministic"]
+definition = "The primary question isn't reflected in the title or H1 and the opening."
+remediation = "Name the question in the title or H1 and answer it in the opening."
+
+[[patterns]]
+id = "DS-KEYWORD-STUFFING"
+name = "Keyword stuffing"
+severity = "major"
+detectors = ["deterministic"]
+definition = "A term's density exceeds the content type's ceiling."
+remediation = "Use the term where it's natural; use pronouns and plain variants elsewhere."
+
+[[patterns]]
+id = "DS-UNKNOWN-LINK"
+name = "Internal link to an unknown page"
+severity = "major"
+detectors = ["deterministic"]
+definition = "An internal link points to a URL that isn't one of the brand's linkable pages."
+remediation = "Link only to pages listed in the brand workspace."
+
+[[patterns]]
+id = "DS-GENERIC-ANCHOR"
+name = "Generic link text"
+severity = "minor"
+detectors = ["deterministic"]
+definition = "Link text such as 'click here' or 'read more' doesn't describe the destination."
+remediation = "Use link text that says what the page is."
+
+[[patterns]]
+id = "DS-INTENT-MISMATCH"
+name = "Doesn't match search intent"
+severity = "major"
+detectors = ["judge"]
+definition = "The piece answers a different need than the one behind its primary question."
+remediation = "Reshape the piece around what someone asking that question wants to get."
+
+[[patterns]]
+id = "DS-WEAK-ANSWER"
+name = "Section doesn't answer its question"
+severity = "major"
+detectors = ["judge"]
+definition = "A section headed as a question doesn't answer it directly in its first sentences, or its answer depends on text elsewhere."
+remediation = "Open the section with a self-contained answer, then explain."
+
+[[patterns]]
+id = "DS-ENTITY-UNCLEAR"
+name = "Brand or offering unclear"
+severity = "minor"
+detectors = ["judge"]
+definition = "It isn't clear who is speaking or which offering is meant."
+remediation = "Name the brand and offering plainly where it matters."
+
+# ------------------------------------------------------------- human writing
+[[patterns]]
+id = "HW-CHAT-RESIDUE"
+name = "Chat or draft residue"
+severity = "critical"
+detectors = ["deterministic"]
+definition = "Assistant or draft artifacts remain: 'As an AI', 'I hope this helps', 'Certainly!', placeholders, notes about drafts."
+remediation = "Remove them."
+
+[[patterns]]
+id = "HW-GENERIC-OPENER"
+name = "Generic opener"
+severity = "major"
+detectors = ["deterministic", "judge"]
+definition = "The piece opens with a stock line: 'In today's fast-paced world', 'Whether you're a...', 'This article will explore'."
+remediation = "Open with the answer, a specific fact from the plan, or the reader's actual situation."
+
+[[patterns]]
+id = "HW-GENERIC-CLOSER"
+name = "Generic closer"
+severity = "major"
+detectors = ["deterministic", "judge"]
+definition = "The piece ends with a stock line: 'In conclusion', 'The future is bright', 'By embracing X, you can unlock Y'."
+remediation = "End with the concrete next step or the last useful point."
+
+[[patterns]]
+id = "HW-CONTRAST-FRAME"
+name = "Contrast frame used as a habit"
+severity = "major"
+detectors = ["deterministic", "judge"]
+definition = "Points are repeatedly framed as 'X is not Y. It is Z' or 'not X, but Y' where a direct statement would do."
+remediation = "State the point directly. Keep a contrast only where it corrects a real misunderstanding."
+example = "A pilot is not a small production system. It is a different kind of system."
+
+[[patterns]]
+id = "HW-FORCED-TRIAD"
+name = "Forced lists of three"
+severity = "minor"
+detectors = ["deterministic", "judge"]
+definition = "Ideas are packaged in threes regardless of how many there really are."
+remediation = "List as many items as there actually are, or make one point well."
+
+[[patterns]]
+id = "HW-MANUFACTURED-PROFUNDITY"
+name = "Manufactured profundity"
+severity = "major"
+detectors = ["deterministic", "judge"]
+definition = "Ordinary points are staged as deep insights: 'at its core', 'the real question is', 'what really matters', 'X becomes a trap'."
+remediation = "Delete the frame and state the point. If deleting the sentence loses nothing, delete it."
+
+[[patterns]]
+id = "HW-STAGING"
+name = "Staging instead of stating"
+severity = "minor"
+detectors = ["deterministic", "judge"]
+definition = "Run-ups delay the point: 'let me be clear', 'here's the thing', 'it's worth noting that'."
+remediation = "Cut the run-up and start with the point."
+
+[[patterns]]
+id = "HW-INFLATION"
+name = "Inflated significance"
+severity = "major"
+detectors = ["deterministic", "judge"]
+definition = "Vague importance words and trailing '-ing' phrases add weight without information: 'pivotal', 'transformative', 'driving innovation', 'underscoring its importance'."
+remediation = "Replace them with what actually changed and for whom, from the plan's evidence."
+
+[[patterns]]
+id = "HW-FILLER"
+name = "Filler"
+severity = "minor"
+detectors = ["deterministic", "judge"]
+definition = "Words and phrases that carry nothing: 'in order to', 'due to the fact that', 'it is important to note'."
+remediation = "Cut or use the plain form."
+
+[[patterns]]
+id = "HW-STACKED-HEDGING"
+name = "Stacked hedging"
+severity = "minor"
+detectors = ["judge"]
+definition = "Several qualifiers pile onto one claim: 'could potentially possibly'."
+remediation = "Keep the one qualifier the evidence justifies."
+
+[[patterns]]
+id = "HW-STACCATO-RUN"
+name = "Staccato run"
+severity = "minor"
+detectors = ["deterministic", "judge"]
+definition = "A run of short fragments is stacked for effect."
+remediation = "Combine them into normal sentences. One short sentence for emphasis is fine."
+
+[[patterns]]
+id = "HW-ONE-LINE-CLOSER"
+name = "Dramatic one-line closers"
+severity = "minor"
+detectors = ["deterministic", "judge"]
+definition = "Paragraphs end with a short dramatic line that only restates what came before."
+remediation = "Cut the line, or make it add a fact, a qualification or a genuine turn."
+
+[[patterns]]
+id = "HW-PARAGRAPH-FORMULA"
+name = "Repeated paragraph shape"
+severity = "major"
+detectors = ["deterministic", "judge"]
+definition = "Many paragraphs follow the same shape (claim, explanation, dramatic closer), so the piece reads as templated."
+remediation = "Let each paragraph take the shape its content needs: some evidence, some reasoning, some consequence."
+
+[[patterns]]
+id = "HW-UNIFORM-RHYTHM"
+name = "Uniform rhythm"
+severity = "minor"
+detectors = ["deterministic", "judge"]
+definition = "Sentences or paragraphs are nearly all the same length, so the prose reads as metronomic."
+remediation = "Vary length where the meaning calls for it. Don't vary it at random."
+
+[[patterns]]
+id = "HW-SYNONYM-CYCLING"
+name = "Synonym cycling"
+severity = "minor"
+detectors = ["judge"]
+definition = "One thing is called by a rotating set of names to avoid repetition."
+remediation = "Pick one name and reuse it, or use a pronoun."
+
+[[patterns]]
+id = "HW-REPLACEABLE-PARAGRAPH"
+name = "Replaceable paragraph"
+severity = "major"
+detectors = ["judge"]
+definition = "A paragraph could appear unchanged in an unrelated piece; it has no mechanism, example, consequence or fact tied to this topic."
+remediation = "Anchor it to this piece's evidence and argument, or remove it."
+
+[[patterns]]
+id = "HW-TRANSITION-STACKING"
+name = "Decorative transitions"
+severity = "minor"
+detectors = ["deterministic", "judge"]
+definition = "Transition words ('furthermore', 'moreover', 'additionally') appear at the start of paragraph after paragraph in place of logical flow."
+remediation = "Let the logic carry the transition; remove the signposts."
+
+[[patterns]]
+id = "HW-CLUSTER"
+name = "Cluster of machine-writing patterns"
+severity = "major"
+detectors = ["deterministic"]
+definition = "Three or more different writing-pattern families converge in one section."
+remediation = "Rewrite the section naturally. Don't swap words one for one; restructure where needed and keep every fact and claim marker."
+
+# --------------------------------------------------------------------- voice
+[[patterns]]
+id = "VO-AVOIDED-TERM"
+name = "Avoided term used"
+severity = "major"
+detectors = ["deterministic"]
+definition = "The text uses a term the voice profile avoids."
+remediation = "Use the profile's alternative, or rephrase."
+
+[[patterns]]
+id = "VO-PUNCTUATION-POLICY"
+name = "Punctuation policy broken"
+severity = "major"
+detectors = ["deterministic"]
+definition = "The text uses punctuation the voice profile rules out, such as em dashes when the policy is 'avoid'."
+remediation = "Use a period, comma, colon or parentheses, or restructure the sentence."
+
+[[patterns]]
+id = "VO-HEADING-CASE"
+name = "Heading case doesn't match the style"
+severity = "minor"
+detectors = ["deterministic"]
+definition = "Headings use title case when the style is sentence case, or the reverse."
+remediation = "Apply the profile's heading case."
+
+[[patterns]]
+id = "VO-VOICE-MISMATCH"
+name = "Doesn't sound like the brand"
+severity = "major"
+detectors = ["judge"]
+definition = "Register, rhythm or word choice departs from the brand's samples and rules; it reads as generic 'professional' copy."
+remediation = "Revise the flagged passages toward the samples' register and habits, without adding facts."
+
+[[patterns]]
+id = "VO-WRONG-PERSON"
+name = "Wrong grammatical person"
+severity = "major"
+detectors = ["judge"]
+definition = "The piece addresses the reader or speaks as the brand in a way the voice profile doesn't use."
+remediation = "Use the profile's speaker and reader address throughout."
+
+# ----------------------------------------------------------------- structure
+[[patterns]]
+id = "ST-HEADING-HIERARCHY"
+name = "Heading levels skip"
+severity = "major"
+detectors = ["deterministic"]
+definition = "Heading levels skip (H1 to H3) or the document has more than one H1."
+remediation = "Fix the heading outline."
+
+[[patterns]]
+id = "ST-MISSING-ELEMENT"
+name = "Required element missing"
+severity = "major"
+detectors = ["deterministic"]
+definition = "A required anatomy element for the content type is absent."
+remediation = "Add the element for its stated purpose, using the plan's material."
+
+[[patterns]]
+id = "ST-LENGTH-OUT-OF-RANGE"
+name = "Length out of range"
+severity = "major"
+detectors = ["deterministic"]
+definition = "The piece is outside the content type's length range."
+remediation = "Cut to what matters or develop what the plan provides. Never pad."
+
+[[patterns]]
+id = "ST-EMPTY-SECTION"
+name = "Empty section"
+severity = "major"
+detectors = ["deterministic"]
+definition = "A heading has no content under it."
+remediation = "Write the section or remove the heading."
+
+[[patterns]]
+id = "ST-COUNT-OUT-OF-RANGE"
+name = "Element count out of range"
+severity = "minor"
+detectors = ["deterministic"]
+definition = "A countable element (sections, value points, FAQ items) is outside the content type's range."
+remediation = "Adjust to the number the content actually supports, within range."
+
+[[patterns]]
+id = "ST-FIELD-LENGTH"
+name = "Short field length out of range"
+severity = "minor"
+detectors = ["deterministic"]
+definition = "A short field such as an email subject or preheader is outside its character range."
+remediation = "Rewrite the field within range."
+
+[[patterns]]
+id = "ST-INVALID-MARKER"
+name = "Malformed claim marker"
+severity = "critical"
+detectors = ["deterministic"]
+definition = "A claim marker is malformed and can't be resolved."
+remediation = "Use the marker format {C<n>} with an allowed claim number."
+
+[[patterns]]
+id = "ST-STRUCTURE-LOST"
+name = "Revision dropped structure"
+severity = "major"
+detectors = ["deterministic"]
+definition = "A revision removed headings, links or primary-question placement that no finding targeted."
+remediation = "Restore them. Revise only what the findings locate."
+
+[[patterns]]
+id = "ST-UNRESOLVED-FINDING"
+name = "Finding left without a resolution"
+severity = "major"
+detectors = ["deterministic"]
+definition = "A revision doesn't account for an open blocking finding."
+remediation = "Resolve, remove or dispute every open blocking finding."
+
+[[patterns]]
+id = "ST-UNCHANGED-FIX"
+name = "Claimed fix didn't change the text"
+severity = "major"
+detectors = ["deterministic"]
+definition = "A revision says a finding was fixed, but the quoted text is unchanged."
+remediation = "Make the change at the located passage."
+
+[[patterns]]
+id = "ST-UNJUSTIFIED-CHANGE"
+name = "Unjustified collateral change"
+severity = "minor"
+detectors = ["deterministic"]
+definition = "A revision changed text outside every finding's location without saying why."
+remediation = "Restore the untouched text, or justify the change in the resolutions."
+
+[[patterns]]
+id = "ST-REQUIRED-CLAIM-REMOVED"
+name = "Required claim removed"
+severity = "major"
+detectors = ["deterministic"]
+definition = "A revision removed a claim the plan requires."
+remediation = "Restore the claim, or send the plan back for change."

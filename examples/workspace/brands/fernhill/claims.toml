@@ -1,0 +1,51 @@
+# Fictional claims for the Fernhill example brand.
+
+[[approved]]
+id = "support-hours"
+kind = "first_party_fact"
+statement = "Fernhill support answers the phone from 6am to 7pm Eastern, Monday to Saturday."
+source = "Fernhill support policy, version 3 (fictional)"
+approved_by = "Example Owner"
+approved_on = 2026-09-01
+
+[[approved]]
+id = "fleet-size"
+kind = "first_party_fact"
+statement = "Fernhill is built for courier firms with 5 to 200 drivers."
+source = "Fernhill product positioning (fictional)"
+approved_by = "Example Owner"
+approved_on = 2026-09-01
+
+[[approved]]
+id = "go-live-time"
+kind = "marketing_claim"
+statement = "Most new customers are dispatching from the board within two weeks of signing up."
+source = "Fernhill onboarding records, first half of 2026 (fictional)"
+approved_by = "Example Owner"
+approved_on = 2026-09-01
+expires_on = 2027-03-01
+allowed_phrasings = ["Most customers are dispatching from the board within two weeks."]
+
+[[approved]]
+id = "quote-dana"
+kind = "testimonial"
+statement = "We stopped reading addresses over the phone in the first week."
+source = "Customer interview, August 2026 (fictional)"
+approved_by = "Example Owner"
+approved_on = 2026-09-01
+attribution = "Dana R., dispatcher at a regional courier (fictional)"
+
+[[approved]]
+id = "spring-migration-offer"
+kind = "marketing_claim"
+statement = "New customers get free spreadsheet migration until June 30."
+source = "Spring 2026 offer (fictional)"
+approved_by = "Example Owner"
+approved_on = 2026-03-01
+expires_on = 2026-06-30
+
+[[forbidden]]
+id = "on-time-guarantee"
+match = "phrase"
+pattern = "guaranteed on-time delivery"
+reason = "Fernhill doesn't control deliveries; promising on-time delivery is a legal risk."

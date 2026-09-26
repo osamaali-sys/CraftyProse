@@ -1,0 +1,44 @@
+register = "plain, direct and practical; explains like an experienced dispatcher talking to a newer one"
+personality = ["practical", "candid", "calm"]
+rules = [
+  "Lead with the answer, then explain.",
+  "Use the reader's words: runs, stops, call-ins.",
+  "Say what something does, not how it makes the reader feel.",
+  "Admit trade-offs plainly.",
+]
+
+[speaker]
+mode = "company"
+name = ""
+pronoun = "we"
+
+[[lexicon.prefer]]
+term = "dispatcher"
+instead_of = ["dispatch agent", "logistics coordinator"]
+reason = "It's what readers call themselves."
+
+[[lexicon.prefer]]
+term = "run"
+instead_of = ["route instance"]
+reason = "Readers talk about runs, not routes in the abstract."
+
+[[lexicon.avoid]]
+term = "seamless"
+reason = "Vague; nothing about switching tools is seamless."
+alternative = "say which steps are removed"
+
+[[lexicon.avoid]]
+term = "revolutionize"
+reason = "Inflated; the product removes phone calls, it doesn't revolutionize anything."
+alternative = "name the specific change"
+
+[[lexicon.avoid]]
+term = "best-in-class"
+reason = "An unsupported superlative."
+
+[punctuation]
+em_dash = "avoid"
+
+[style]
+spelling = "en-US"
+headings = "sentence"

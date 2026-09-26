@@ -1,0 +1,41 @@
+id = "email_newsletter"
+name = "Email newsletter"
+goal = "nurture"
+description = "A newsletter issue with one useful idea for existing readers and a single call to action."
+
+[length]
+unit = "words"
+range = [250, 700]
+
+[anatomy]
+required = ["subject", "preheader", "body", "primary_cta"]
+optional = ["sign_off"]
+headings = false
+
+[anatomy.fields]
+subject = [25, 60]
+preheader = [40, 110]
+
+[evidence]
+third_party_required = false
+min_supported_claims = 0
+
+[evidence.max_source_age_years]
+statistic = 3
+default = 5
+
+[discoverability]
+enabled = false
+
+[human_writing]
+mode = "marketing"
+
+[review]
+judges = ["evidence", "editorial", "writing"]
+
+[release]
+format = "markdown"
+citation_style = "inline_links"
+
+[approval]
+required = true

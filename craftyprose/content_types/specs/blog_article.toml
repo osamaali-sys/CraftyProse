@@ -1,0 +1,50 @@
+id = "blog_article"
+name = "Blog article"
+goal = "educate"
+description = "A search-discoverable article that answers one reader question fully and leads to one next step."
+
+[length]
+unit = "words"
+range = [900, 1600]
+
+[anatomy]
+required = ["title", "answer_first_intro", "body_sections", "cta"]
+optional = ["faq", "how_we_work"]
+headings = true
+
+[anatomy.counts]
+body_sections = [3, 7]
+faq = [3, 5]
+
+[anatomy.limits]
+intro_max_sentences = 3
+
+[evidence]
+third_party_required = true
+min_supported_claims = 3
+
+[evidence.max_source_age_years]
+statistic = 3
+default = 5
+
+[discoverability]
+enabled = true
+primary_question_required = true
+title_chars = [30, 65]
+meta_description_chars = [120, 160]
+keyword_density_max = 0.025
+internal_links = [1, 4]
+jsonld = ["BlogPosting", "FAQPage"]
+
+[human_writing]
+mode = "marketing"
+
+[review]
+judges = ["evidence", "editorial", "writing"]
+
+[release]
+format = "markdown"
+citation_style = "inline_links"
+
+[approval]
+required = true

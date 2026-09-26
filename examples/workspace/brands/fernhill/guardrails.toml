@@ -1,0 +1,30 @@
+[[rules]]
+id = "no-pricing"
+type = "banned_topic"
+terms = ["pricing", "price", "per-driver cost", "discount"]
+message = "Pricing isn't published in content; point readers to a sales conversation instead."
+
+[[rules]]
+id = "no-competitor-names"
+type = "forbidden_term"
+terms = ["Tanager Routes", "Blue Heron Dispatch"]
+message = "Don't name competitors."
+
+[[rules]]
+id = "company-voice"
+type = "speaker_policy"
+policy = "no_first_person_singular"
+message = "Fernhill speaks as 'we', never as one person."
+
+[[rules]]
+id = "hours-of-service"
+type = "required_disclosure"
+triggers = ["hours of service", "driver hours rules"]
+disclosure = "This isn't legal advice. Check the hours-of-service rules that apply to your drivers."
+message = "Any mention of driver-hours regulation needs the disclosure."
+
+[[rules]]
+id = "no-unapproved-speed-claims"
+type = "forbidden_pattern"
+pattern = '\b\d{1,3}\s?% (?:faster|quicker|less time)\b'
+message = "Speed percentages need an approved claim."

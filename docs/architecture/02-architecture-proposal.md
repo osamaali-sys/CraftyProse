@@ -620,7 +620,7 @@ CraftyProse/
     content_types/ loader.py specs/*.toml rules/*.py
     runtime/       llm.py anthropic_llm.py replay_llm.py manual_llm.py
     render/        citations.py jsonld.py package.py
-  examples/workspace/brands/northwind-studio/   fictional brand for demos and tests
+  examples/workspace/brands/fernhill/           fictional brand for demos and tests (renamed from northwind-studio in M2; see docs/progress/M2-eis.md)
   tests/           unit/ contract/ integration/ adversarial/ regression/ calibration/ corpora/ fixtures/
   docs/            extraction/ architecture/ guides/
 ```

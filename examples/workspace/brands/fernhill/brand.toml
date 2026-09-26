@@ -1,0 +1,35 @@
+# Fernhill is a fictional brand used for examples and tests. Every name, figure
+# and URL here is invented; .example domains are reserved and never resolve.
+id = "fernhill"
+name = "Fernhill"
+description = "Fernhill makes dispatch and scheduling software for small courier and delivery firms."
+positioning = "Built for dispatchers at firms with 5 to 200 drivers, who plan the day on spreadsheets and phone calls today."
+locale = "en-US"
+markets = ["US courier and last-mile delivery firms with 5 to 200 drivers"]
+
+[[offerings]]
+id = "dispatch-board"
+name = "Dispatch Board"
+summary = "A shared board where dispatchers assign, reorder and track the day's runs."
+url = "https://fernhill.example/dispatch-board"
+
+[[offerings]]
+id = "driver-app"
+name = "Driver App"
+summary = "A phone app drivers use to see their runs and confirm each stop."
+url = "https://fernhill.example/driver-app"
+
+[[linkable_pages]]
+url = "https://fernhill.example/dispatch-board"
+title = "Dispatch Board"
+topics = ["dispatch", "scheduling", "runs"]
+
+[[linkable_pages]]
+url = "https://fernhill.example/guides/first-hour"
+title = "How dispatchers plan the first hour of the day"
+topics = ["planning", "morning", "dispatch"]
+
+[[linkable_pages]]
+url = "https://fernhill.example/onboarding"
+title = "Getting started with Fernhill"
+topics = ["onboarding", "setup"]

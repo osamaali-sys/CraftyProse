@@ -4,7 +4,7 @@ A content engine for business and marketing content. It researches, plans, write
 
 ## Status
 
-**Architecture approved 2026-09-25.** Milestone M1 (core engine) is built and tested.
+**Architecture approved 2026-09-25.** Milestones M1 (core engine) and M2 (EIS and content types) are built and tested.
 
 | Phase | State |
 |---|---|
@@ -12,7 +12,7 @@ A content engine for business and marketing content. It researches, plans, write
 | 2. Methodology extraction | Done |
 | 3. Architecture | Approved |
 | 4. Architectural review | Approved (decisions in proposal §22.1) |
-| 5. Build | M1 core done ([progress note](docs/progress/M1-core.md)); M2 next |
+| 5. Build | M1 core ([note](docs/progress/M1-core.md)) and M2 EIS + content types ([note](docs/progress/M2-eis.md)) done; M3 evidence next |
 | 6–7. Validate, adversarial QA | Not started |
 
 ## Run the tests

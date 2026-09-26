@@ -1,0 +1,40 @@
+id = "linkedin_post"
+name = "LinkedIn post"
+goal = "engage"
+description = "A short post with one idea, opened by a hook that works before the feed truncates it."
+
+[length]
+unit = "characters"
+range = [400, 2200]
+
+[anatomy]
+required = ["hook", "body"]
+optional = ["closing_prompt", "cta"]
+headings = false
+
+[anatomy.limits]
+hook_max_chars = 200
+
+[evidence]
+third_party_required = false
+min_supported_claims = 0
+
+[evidence.max_source_age_years]
+statistic = 3
+default = 5
+
+[discoverability]
+enabled = false
+
+[human_writing]
+mode = "shortform"
+
+[review]
+judges = ["evidence", "editorial", "writing"]
+
+[release]
+format = "plain_text"
+citation_style = "sources_note"
+
+[approval]
+required = true

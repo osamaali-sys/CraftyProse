@@ -3,6 +3,7 @@ engine test case. Stub stages stand in for the real stages built in M2 to M7;
 they exercise the core, not content logic."""
 from __future__ import annotations
 
+import datetime as dt
 import shutil
 import tempfile
 import unittest
@@ -166,3 +167,41 @@ class EngineTestCase(unittest.TestCase):
 
     def events_named(self, engine: Engine, work_id: str, name: str) -> list[dict[str, Any]]:
         return [e for e in engine.events(work_id) if e["event"] == name]
+
+
+# ---------------------------------------------------------------- EIS helpers
+REPO_ROOT = Path(__file__).resolve().parents[1]
+EXAMPLE_WORKSPACE = REPO_ROOT / "examples" / "workspace"
+AS_OF = dt.date(2026, 9, 26)
+
+
+class BrandTestCase(unittest.TestCase):
+    """Copies the fictional example brand into a temp workspace so a test can change one file."""
+
+    def setUp(self) -> None:
+        self.tmp = Path(tempfile.mkdtemp(prefix="craftyprose-eis-"))
+        self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
+        self.workspace = self.tmp / "workspace"
+        shutil.copytree(EXAMPLE_WORKSPACE, self.workspace)
+        self.brand_root = self.workspace / "brands" / "fernhill"
+
+    def edit(self, name: str, old: str, new: str) -> None:
+        path = self.brand_root / name
+        text = path.read_text(encoding="utf-8")
+        if old not in text:
+            raise AssertionError(f"{old!r} not in {name}")
+        path.write_text(text.replace(old, new, 1), encoding="utf-8")
+
+    def append(self, name: str, text: str) -> None:
+        path = self.brand_root / name
+        path.write_text(path.read_text(encoding="utf-8") + text, encoding="utf-8")
+
+    def write(self, name: str, text: str) -> None:
+        path = self.brand_root / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(text, encoding="utf-8")
+
+    def load(self):
+        from craftyprose.content_types.loader import Catalog
+        from craftyprose.eis.workspace import load_brand
+        return load_brand(self.workspace, "fernhill", content_types=Catalog().ids())

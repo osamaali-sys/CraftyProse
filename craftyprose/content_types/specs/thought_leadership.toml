@@ -1,0 +1,46 @@
+id = "thought_leadership"
+name = "Thought leadership"
+goal = "position"
+description = "An argued piece that takes a clear position, supports it with evidence and deals honestly with the strongest objection."
+
+[length]
+unit = "words"
+range = [1000, 2000]
+
+[anatomy]
+required = ["title", "thesis", "body_sections", "counter_position", "cta"]
+optional = []
+headings = true
+
+[anatomy.counts]
+body_sections = [3, 6]
+
+[evidence]
+third_party_required = true
+min_supported_claims = 4
+
+[evidence.max_source_age_years]
+statistic = 3
+default = 5
+
+[discoverability]
+enabled = true
+primary_question_required = false
+title_chars = [30, 70]
+meta_description_chars = [120, 160]
+keyword_density_max = 0.02
+internal_links = [0, 3]
+jsonld = ["Article"]
+
+[human_writing]
+mode = "reference"
+
+[review]
+judges = ["evidence", "editorial", "writing"]
+
+[release]
+format = "markdown"
+citation_style = "footnotes"
+
+[approval]
+required = true

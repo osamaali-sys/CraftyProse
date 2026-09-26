@@ -20,4 +20,4 @@ craftyprose = "craftyprose.cli:main"
 include = ["craftyprose*"]
 
 [tool.setuptools.package-data]
-craftyprose = ["runtime/pricing.toml"]
+craftyprose = ["runtime/pricing.toml", "content_types/specs/*.toml", "eis/standards/*.toml", "eis/standards/*.md"]

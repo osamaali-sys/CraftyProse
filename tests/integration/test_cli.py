@@ -1,10 +1,11 @@
 import contextlib
 import io
 import json
+import shutil
 import unittest
 
 from craftyprose.cli import main
-from tests.helpers import EngineTestCase
+from tests.helpers import EXAMPLE_WORKSPACE, EngineTestCase
 
 
 class CliTest(EngineTestCase):
@@ -15,9 +16,10 @@ class CliTest(EngineTestCase):
         return code, out.getvalue(), err.getvalue()
 
     def test_new_status_list_events(self):
+        shutil.copytree(EXAMPLE_WORKSPACE / "brands", self.workspace / "brands")
         request = self.tmp / "request.md"
         request.write_text("Write a LinkedIn post about onboarding.", encoding="utf-8")
-        code, out, _ = self.cli("new", str(request), "--brand", "northwind", "--type", "linkedin_post")
+        code, out, _ = self.cli("new", str(request), "--brand", "fernhill", "--type", "linkedin_post")
         self.assertEqual(code, 0)
         work_id = out.split()[1]
         code, out, _ = self.cli("status", work_id)
